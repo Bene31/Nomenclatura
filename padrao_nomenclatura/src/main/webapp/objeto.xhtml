@@ -20,6 +20,14 @@
                         <h:outputText value="#{lista.idObjt}" />
                     </p:column>
                     
+                    <p:column headerText="Tipo" sortBy="#{lista.dsTipoObjt}" filterBy="#{lista.dsTipoObjt}">
+                        <h:outputText value="#{lista.idTipoObjt.dsTipoObjt}" />
+                    </p:column>
+                    
+                    <p:column headerText="Prefixo" sortBy="#{lista.sgPrfx}" filterBy="#{lista.sgPrfx}">
+                        <h:outputText value="#{lista.idPrfx.sgPrfx}" />
+                    </p:column>
+                    
                     <p:column headerText="Nome" sortBy="#{lista.nmObjt}" filterBy="#{lista.nmObjt}">
                         <h:outputText value="#{lista.nmObjt}" />
                     </p:column>
@@ -59,6 +67,16 @@
 
             <p:dialog header="Novo" widgetVar="record" modal="true" focus="sigla">
                 <p:panelGrid id="panelRecord" columns="2"> 
+                    TIPO:
+                    <p:selectOneMenu id="idTipoObjt" value="#{tSpdcObjtBean.TSpdcObjt.idTipoObjt}" style="width:250px" converter="#{TpObjtConverter}">
+                                     <f:selectItem itemLabel="Selecione o tipo de objeto" itemValue="0"/>
+                                     <f:selectItems value="#{tSpdcObjtBean.TTipoObjts}" var="t" itemValue="#{t}" itemLabel="#{t.dsTipoObjt}" />
+                    </p:selectOneMenu>
+                    PREFIXO:
+                    <p:selectOneMenu id="idPrfx" value="#{tSpdcObjtBean.TSpdcObjt.idPrfx}" style="width:250px" converter="#{prefixoConverter}">
+                                     <f:selectItem itemLabel="Selecione um Prefixo" itemValue="0"/>
+                                     <f:selectItems value="#{tSpdcObjtBean.TSpdcPrfxs}" var="c" itemValue="#{c}" itemLabel="#{c.sgPrfx}" />
+                    </p:selectOneMenu>
                     NOME DO OBJETO:
                     <p:inputText id="sigla" value="#{tSpdcObjtBean.TSpdcObjt.nmObjt}" /> 
                     DESCRIÇÃO DO OBJETO:

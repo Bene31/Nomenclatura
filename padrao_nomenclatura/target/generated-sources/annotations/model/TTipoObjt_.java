@@ -6,7 +6,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import model.TSpdcObjt;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-03-31T10:49:25")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-04-11T12:44:40")
 @StaticMetamodel(TTipoObjt.class)
 public class TTipoObjt_ { 
 

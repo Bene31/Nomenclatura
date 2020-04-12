@@ -7,6 +7,7 @@ package bean;
 
 import model.TSpdcPrfx;
 import dao.TSpdcPrfxDao;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -19,8 +20,9 @@ import javax.faces.event.ActionEvent;
  */
 @ManagedBean
 @ViewScoped
-public class tSpdcPrfxBean {
+public class tSpdcPrfxBean implements Serializable{
     
+    private static final long serialVersionUID = 1L;
     TSpdcPrfx tSpdcPrfx = new TSpdcPrfx();
     
     List tSpdcPrfxs = new ArrayList();

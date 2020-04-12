@@ -89,12 +89,12 @@
                     <p:inputText id="ic" value="#{tSpdcPrmtAcssoTxtoBean.TSpdcPrmtAcssoTxto.icTipoAcssoTxto}" />
                 </p:panelGrid>  
                 <br/>
-                <p:commandButton value="Salvar" actionListener="#{tSpdcObjtBean.Record}" onclick="record.hide()" alt="Record"/> 
+                <p:commandButton value="Salvar" actionListener="#{tSpdcPrmtAcssoTxtoBean.Record}" onclick="record.hide()" alt="Record"/> 
             </p:dialog>
             
             <p:dialog header="Deletar" widgetVar="remove" modal="false"> 
                 Você tem certeza?
-                <p:commandButton value="Deletar" actionListener="#{tSpdcObjtBean.Exclude}" onclick="remove.hide()" alt="Delete" /> 
+                <p:commandButton value="Deletar" actionListener="#{tSpdcPrmtAcssoTxtoBean.Exclude}" onclick="remove.hide()" alt="Delete" /> 
             </p:dialog>
             
         </h:form>

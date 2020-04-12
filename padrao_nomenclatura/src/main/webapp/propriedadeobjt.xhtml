@@ -20,8 +20,16 @@
                         <h:outputText value="#{lista.idPrpdObjt}" />
                     </p:column>
                     
+                    <p:column headerText="Prefixo" sortBy="#{lista.sgPrfx}" filterBy="#{lista.sgPrfx}">
+                        <h:outputText value="#{lista.idPrfx.sgPrfx}" />
+                    </p:column>
+                    
                     <p:column headerText="Nome" sortBy="#{lista.nmPrpdObjt}" filterBy="#{lista.nmPrpdObjt}">
                         <h:outputText value="#{lista.nmPrpdObjt}" />
+                    </p:column>
+                    
+                    <p:column headerText="Objeto" sortBy="#{lista.nmObjt}" filterBy="#{lista.nmObjt}">
+                        <h:outputText value="#{lista.idObjt.nmObjt}" />
                     </p:column>
                     
                     <p:column headerText="Opções" exportable="false">
@@ -55,8 +63,18 @@
 
             <p:dialog header="Novo" widgetVar="record" modal="true" focus="sigla">
                 <p:panelGrid id="panelRecord" columns="2"> 
+                    PREFIXO:
+                    <p:selectOneMenu id="idPrfx" value="#{tSpdcPrpdObjtBean.TSpdcPrpdObjt.idPrfx}" style="width:250px" converter="#{prefixoConverter}">
+                                     <f:selectItem itemLabel="Selecione um Prefixo" itemValue="0"/>
+                                     <f:selectItems value="#{tSpdcPrpdObjtBean.TSpdcPrfxs}" var="c" itemValue="#{c}" itemLabel="#{c.sgPrfx}" />
+                    </p:selectOneMenu>
                     NOME DA PROPRIEDADE DO OBJETO:
                     <p:inputText id="sigla" value="#{tSpdcPrpdObjtBean.TSpdcPrpdObjt.nmPrpdObjt}" /> 
+                    OBJETO:
+                    <p:selectOneMenu id="idObjt" value="#{tSpdcPrpdObjtBean.TSpdcPrpdObjt.idObjt}" style="width:250px" converter="#{objetoConverter}">
+                                     <f:selectItem itemLabel="Selecione um objeto" itemValue="0"/>
+                                     <f:selectItems value="#{tSpdcPrpdObjtBean.TSpdcObjts}" var="o" itemValue="#{o}" itemLabel="#{o.nmObjt}" />
+                    </p:selectOneMenu>
                 </p:panelGrid>  
                 <br/>
                 <p:commandButton value="Salvar" actionListener="#{tSpdcPrpdObjtBean.Record}" onclick="record.hide()" alt="Record"/> 
