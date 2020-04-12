@@ -15,6 +15,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import model.TSpdcPrfx;
 
+/**
+ *
+ * @author terra
+ */
+
 public class TSpdcPrfxDao implements Serializable{
     public static TSpdcPrfxDao tSpdcPrfxDao;
     

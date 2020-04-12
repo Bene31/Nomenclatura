@@ -18,6 +18,7 @@ import model.TSpdcPrmtAcssoTxto;
  *
  * @author terra
  */
+
 public class TSpdcPrmtAcssoTxtoDao {
     public static TSpdcPrmtAcssoTxtoDao tSpdcPrmtAcssoTxtoDao;
     

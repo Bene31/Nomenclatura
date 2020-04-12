@@ -7,7 +7,7 @@ import org.eclipse.persistence.sessions.Session;
 
 /**
  *
- * @author tassio
+ * @author terra
  */
 public abstract class PersistenceUtil {
 

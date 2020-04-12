@@ -15,6 +15,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import model.TSpdcObjt;
 
+/**
+ *
+ * @author terra
+ */
+
 public class TSpdcObjtDao implements Serializable{
     public static TSpdcObjtDao tSpdcObjtDao;
     

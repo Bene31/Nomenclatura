@@ -19,6 +19,7 @@ import model.TSpdcVocbCntld;
  *
  * @author terra
  */
+
 public class TSpdcVocbCntldDao {
     public static TSpdcVocbCntldDao tSpdcVocbCntldDao;
     

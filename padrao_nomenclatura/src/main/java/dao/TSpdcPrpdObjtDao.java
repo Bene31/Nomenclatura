@@ -19,6 +19,7 @@ import model.TSpdcPrpdObjt;
  *
  * @author terra
  */
+
 public class TSpdcPrpdObjtDao {
     public static TSpdcPrpdObjtDao tSpdcPrpdObjtDao;
     

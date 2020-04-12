@@ -15,6 +15,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import model.TTipoObjt;
 
+/**
+ *
+ * @author terra
+ */
+
 public class TTipoObjtDao implements Serializable{
     public static TTipoObjtDao tTipoObjtDao;
     
