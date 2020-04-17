@@ -61,19 +61,21 @@
             </p:confirmDialog>  
 
 
-            <p:dialog header="Novo" widgetVar="record" modal="true" focus="sigla">
+            <p:dialog header="Novo" widgetVar="record" modal="true" focus="nome">
                 <p:panelGrid id="panelRecord" columns="2"> 
                     PREFIXO:
-                    <p:selectOneMenu id="idPrfx" value="#{tSpdcPrpdObjtBean.TSpdcPrpdObjt.idPrfx}" style="width:250px" converter="#{prefixoConverter}">
-                                     <f:selectItem itemLabel="Selecione um Prefixo" itemValue="0"/>
-                                     <f:selectItems value="#{tSpdcPrpdObjtBean.TSpdcPrfxs}" var="c" itemValue="#{c}" itemLabel="#{c.sgPrfx}" />
+                    <p:selectOneMenu id="idPrfx" value="#{tSpdcPrpdObjtBean.TSpdcPrpdObjt.idPrfx}" converter="prefixoConverter">
+                        <f:selectItem itemLabel="Selecione um Prefixo" itemValue="" />
+                        <f:selectItems value="#{tSpdcPrfxBean.TSpdcPrfxs}" var="c" itemLabel="#{c.sgPrfx}" itemValue="#{c}" />
                     </p:selectOneMenu>
                     NOME DA PROPRIEDADE DO OBJETO:
-                    <p:inputText id="sigla" value="#{tSpdcPrpdObjtBean.TSpdcPrpdObjt.nmPrpdObjt}" /> 
+                    <p:inputText id="nome" value="#{tSpdcPrpdObjtBean.TSpdcPrpdObjt.nmPrpdObjt}" />
+                    DESCRIÇÂO DA PROPRIEDADE DO OBJETO:
+                    <p:inputText id="desc" value="#{tSpdcPrpdObjtBean.TSpdcPrpdObjt.dcPrpdObjt}" />
                     OBJETO:
-                    <p:selectOneMenu id="idObjt" value="#{tSpdcPrpdObjtBean.TSpdcPrpdObjt.idObjt}" style="width:250px" converter="#{objetoConverter}">
-                                     <f:selectItem itemLabel="Selecione um objeto" itemValue="0"/>
-                                     <f:selectItems value="#{tSpdcPrpdObjtBean.TSpdcObjts}" var="o" itemValue="#{o}" itemLabel="#{o.nmObjt}" />
+                    <p:selectOneMenu id="idObjt" value="#{tSpdcPrpdObjtBean.TSpdcPrpdObjt.idObjt}" converter="objetoConverter">
+                        <f:selectItem itemLabel="Selecione um objeto" itemValue="" />
+                        <f:selectItems value="#{tSpdcObjtBean.TSpdcObjts}" var="o" itemLabel="#{o.nmObjt}" itemValue="#{o}" />
                     </p:selectOneMenu>
                 </p:panelGrid>  
                 <br/>

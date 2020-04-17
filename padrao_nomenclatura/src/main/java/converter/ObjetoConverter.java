@@ -20,19 +20,22 @@ import javax.faces.convert.FacesConverter;
 public class ObjetoConverter implements Converter {
 
     @Override
-    public Object getAsObject(FacesContext arg0, UIComponent arg1, String id) {
-        if (id != null && !id.isEmpty()) {
-            return (TSpdcObjt) new TSpdcObjtDao().buscar(Integer.valueOf(id));
+    public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
+        if (value != null && !value.isEmpty()) {
+            return (TSpdcObjt) uic.getAttributes().get(value);
         }
-        return id;
+        return null;
     }
 
     @Override
-    public String getAsString(FacesContext arg0, UIComponent arg1, Object objeto) {
-        if (objeto != null) {
-            TSpdcObjt tSpdcObjt = (TSpdcObjt) objeto;
-            return tSpdcObjt.getIdObjt()!= null && tSpdcObjt.getIdObjt() > 0 ? tSpdcObjt.getIdObjt().toString() : null;
+    public String getAsString(FacesContext fc, UIComponent uic, Object value) {
+        if (value instanceof TSpdcObjt) {
+            TSpdcObjt objt = (TSpdcObjt) value;
+            if (objt != null && objt instanceof TSpdcObjt && objt.getIdObjt()!= null) {
+                uic.getAttributes().put(objt.getIdObjt().toString(), objt);
+                return objt.getIdObjt().toString();
+            }
         }
-        return null;
+        return "";
     }
 }

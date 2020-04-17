@@ -20,19 +20,22 @@ import javax.faces.convert.FacesConverter;
 public class PrefixoConverter implements Converter{
 
     @Override
-    public Object getAsObject(FacesContext arg0, UIComponent arg1, String id) {
-        if (id != null && !id.isEmpty()) {
-            return (TSpdcPrfx) new TSpdcPrfxDao().buscar(Integer.valueOf(id));
+    public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
+        if (value != null && !value.isEmpty()) {
+            return (TSpdcPrfx) uic.getAttributes().get(value);
         }
-        return id;
+        return null;
     }
 
     @Override
-    public String getAsString(FacesContext arg0, UIComponent arg1, Object objeto) {
-        if (objeto != null) {
-            TSpdcPrfx tSpdcPrfx = (TSpdcPrfx) objeto;
-            return tSpdcPrfx.getIdPrfx()!= null && tSpdcPrfx.getIdPrfx() > 0 ? tSpdcPrfx.getIdPrfx().toString() : null;
+    public String getAsString(FacesContext fc, UIComponent uic, Object value) {
+        if (value instanceof TSpdcPrfx) {
+            TSpdcPrfx prfx = (TSpdcPrfx) value;
+            if (prfx != null && prfx instanceof TSpdcPrfx && prfx.getIdPrfx()!= null) {
+                uic.getAttributes().put(prfx.getIdPrfx().toString(), prfx);
+                return prfx.getIdPrfx().toString();
+            }
         }
-        return null;
+        return "";
     }
 }

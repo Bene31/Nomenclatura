@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "TTipoObjt.findAll", query = "SELECT to FROM TTipoObjt to")
     , @NamedQuery(name = "TTipoObjt.findByIdTipoObjt", query = "SELECT to FROM TTipoObjt to WHERE to.idTipoObjt = :idTipoObjt")
     , @NamedQuery(name = "TTipoObjt.findByDsTipoObjt", query = "SELECT to FROM TTipoObjt to WHERE to.dsTipoObjt = :dsTipoObjt")})
-public class TTipoObjt implements Serializable {
+public class TTipoObjt implements Serializable, Comparable<TTipoObjt> {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -108,6 +108,11 @@ public class TTipoObjt implements Serializable {
     @Override
     public String toString() {
         return "model.TTipoObjt[ idTipoObjt=" + idTipoObjt + " ]";
+    }
+    
+    @Override
+    public int compareTo(TTipoObjt tTipoObjt) {
+        return this.dsTipoObjt.toLowerCase().compareTo(tTipoObjt.getDsTipoObjt().toLowerCase());
     }
     
 }

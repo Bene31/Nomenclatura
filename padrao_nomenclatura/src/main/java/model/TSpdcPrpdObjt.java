@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "TSpdcPrpdObjt.findByIdPrpdObjt", query = "SELECT t FROM TSpdcPrpdObjt t WHERE t.idPrpdObjt = :idPrpdObjt")
     , @NamedQuery(name = "TSpdcPrpdObjt.findByNmPrpdObjt", query = "SELECT t FROM TSpdcPrpdObjt t WHERE t.nmPrpdObjt = :nmPrpdObjt")
     , @NamedQuery(name = "TSpdcPrpdObjt.findByDcPrpdObjt", query = "SELECT t FROM TSpdcPrpdObjt t WHERE t.dcPrpdObjt = :dcPrpdObjt")})
-public class TSpdcPrpdObjt implements Serializable {
+public class TSpdcPrpdObjt implements Serializable, Comparable<TSpdcPrpdObjt> {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -148,4 +148,8 @@ public class TSpdcPrpdObjt implements Serializable {
         return "model.TSpdcPrpdObjt[ idPrpdObjt=" + idPrpdObjt + " ]";
     }
     
+    @Override
+    public int compareTo(TSpdcPrpdObjt tSpdcPrpdObjt) {
+        return this.nmPrpdObjt.toLowerCase().compareTo(tSpdcPrpdObjt.getNmPrpdObjt().toLowerCase());
+    }
 }

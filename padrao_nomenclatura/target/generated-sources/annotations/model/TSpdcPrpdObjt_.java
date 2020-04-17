@@ -8,7 +8,7 @@ import model.TSpdcObjt;
 import model.TSpdcPrfx;
 import model.TSpdcVocbCntld;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-04-11T12:44:40")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-04-16T11:08:28")
 @StaticMetamodel(TSpdcPrpdObjt.class)
 public class TSpdcPrpdObjt_ { 
 

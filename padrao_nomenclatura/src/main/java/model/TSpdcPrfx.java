@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "TSpdcPrfx.findByDsCntdPrfx", query = "SELECT t FROM TSpdcPrfx t WHERE t.dsCntdPrfx = :dsCntdPrfx")
     , @NamedQuery(name = "TSpdcPrfx.findByDsExploPrfx", query = "SELECT t FROM TSpdcPrfx t WHERE t.dsExploPrfx = :dsExploPrfx")
     , @NamedQuery(name = "TSpdcPrfx.findByDsDfncPrfx", query = "SELECT t FROM TSpdcPrfx t WHERE t.dsDfncPrfx = :dsDfncPrfx")})
-public class TSpdcPrfx implements Serializable {
+public class TSpdcPrfx implements Serializable, Comparable<TSpdcPrfx> {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -179,6 +179,11 @@ public class TSpdcPrfx implements Serializable {
     @Override
     public String toString() {
         return "model.TSpdcPrfx[ idPrfx=" + idPrfx + " ]";
+    }
+    
+    @Override
+    public int compareTo(TSpdcPrfx tSpdcPrfx) {
+        return this.sgPrfx.toLowerCase().compareTo(tSpdcPrfx.getSgPrfx().toLowerCase());
     }
     
 }

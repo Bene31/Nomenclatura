@@ -14,10 +14,8 @@ import javax.faces.event.ActionEvent;
 import model.TSpdcPrpdObjt;
 import model.TSpdcPrfx;
 import dao.TSpdcPrfxDao;
-import converter.PrefixoConverter;
 import model.TSpdcObjt;
 import dao.TSpdcObjtDao;
-import converter.ObjetoConverter;
 
 /**
  *
@@ -29,23 +27,19 @@ public class tSpdcPrpdObjtBean {
     TSpdcPrpdObjt tSpdcPrpdObjt = new TSpdcPrpdObjt();
     List tSpdcPrpdObjts = new ArrayList();
     private List<TSpdcPrfx> tSpdcPrfxs;
-    private TSpdcPrfx idPrfx;
     private TSpdcPrfxDao tSpdcPrfxDao;
-    private PrefixoConverter prfxConv;
     private List<TSpdcObjt> tSpdcObjts;
-    private TSpdcObjt idObjt;
     private TSpdcObjtDao tSpdcObjtDao;
-    private ObjetoConverter objtConv;
+    private TSpdcPrpdObjtDao tSpdcPrpdObjtDao;
 
     public tSpdcPrpdObjtBean() {
         tSpdcPrpdObjts = new TSpdcPrpdObjtDao().buscarTodas();
         tSpdcPrpdObjt = new TSpdcPrpdObjt();
         tSpdcPrfxs = new TSpdcPrfxDao().buscarTodas();
         tSpdcPrfxDao = new TSpdcPrfxDao();
-        prfxConv = new PrefixoConverter();
         tSpdcObjts = new TSpdcObjtDao().buscarTodas();
         tSpdcObjtDao = new TSpdcObjtDao();
-        objtConv = new ObjetoConverter();
+        tSpdcPrpdObjtDao = new TSpdcPrpdObjtDao();
     }
     
     public void Record(ActionEvent actionEvent)
@@ -82,6 +76,7 @@ public class tSpdcPrpdObjtBean {
     }
     
     public List<TSpdcPrfx> getTSpdcPrfxs() {
+        tSpdcPrfxs = tSpdcPrfxDao.buscarTodas();
         return tSpdcPrfxs;
     }
 
@@ -89,31 +84,17 @@ public class tSpdcPrpdObjtBean {
         this.tSpdcPrfxs = tSpdcPrfxs;
     }
     
-    public TSpdcPrfx getIdPrfx() {
-        return idPrfx;
-    }
-
-    public void setIdPrfx(TSpdcPrfx idPrfx) {
-        this.idPrfx = idPrfx;
-    }
-    
-    public TSpdcPrfxDao gettSpdcPrfxDao() {
+    public TSpdcPrfxDao getTSpdcPrfxDao() {
         return tSpdcPrfxDao;
     }
 
-    public void settSpdcPrfxDao(TSpdcPrfxDao tSpdcPrfxDao) {
+    public void setTSpdcPrfxDao(TSpdcPrfxDao tSpdcPrfxDao) {
         this.tSpdcPrfxDao = tSpdcPrfxDao;
     }
     
-    public PrefixoConverter getPrfxConv() {
-        return prfxConv;
-    }
-
-    public void setPrfxConv(PrefixoConverter prfxConv) {
-        this.prfxConv = prfxConv;
-    }
     
     public List<TSpdcObjt> getTSpdcObjts() {
+        tSpdcObjts = tSpdcObjtDao.buscarTodas();
         return tSpdcObjts;
     }
 
@@ -121,27 +102,21 @@ public class tSpdcPrpdObjtBean {
         this.tSpdcObjts = tSpdcObjts;
     }
     
-    public TSpdcObjt getIdObjt() {
-        return idObjt;
-    }
-
-    public void setIdPrfx(TSpdcObjt idObjt) {
-        this.idObjt = idObjt;
-    }
     
-    public TSpdcObjtDao gettSpdcObjtDao() {
+    public TSpdcObjtDao getTSpdcObjtDao() {
         return tSpdcObjtDao;
     }
 
-    public void settSpdcObjtDao(TSpdcObjtDao tSpdcObjtDao) {
+    public void setTSpdcObjtDao(TSpdcObjtDao tSpdcObjtDao) {
         this.tSpdcObjtDao = tSpdcObjtDao;
     }
     
-    public ObjetoConverter getObjtConv() {
-        return objtConv;
+    public TSpdcObjtDao getTSpdcPrpdObjtDao() {
+        return tSpdcObjtDao;
     }
 
-    public void setObjtConv(ObjetoConverter objtConv) {
-        this.objtConv = objtConv;
+    public void setTSpdcPrpdObjtDao(TSpdcPrpdObjtDao tSpdcPrpdObjtDao) {
+        this.tSpdcPrpdObjtDao = tSpdcPrpdObjtDao;
     }
+    
 }

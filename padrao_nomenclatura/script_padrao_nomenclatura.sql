@@ -29,8 +29,8 @@ CREATE TABLE IF NOT EXISTS `padrao_documento`.`T_TIPO_OBJT` (
 
 CREATE TABLE IF NOT EXISTS `padrao_documento`.`T_SPDC_OBJT` (
   `ID_OBJT` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Identificador único do objeto inserido no sistema de padronizao de documentos.',
-  `ID_TIPO_OBJT` INT NOT NULL,
-  `ID_PRFX` INT NOT NULL COMMENT 'Identificador único do prefixo que compoe o nome do objeto',
+  `ID_TIPO_OBJT` INT DEFAULT NULL,
+  `ID_PRFX` INT DEFAULT NULL COMMENT 'Identificador único do prefixo que compoe o nome do objeto',
   `NM_OBJT` VARCHAR(50) NOT NULL COMMENT 'Nome do objeto de padronizacao de documentos.',
   `DC_OBJT` VARCHAR(1000) NULL COMMENT 'Descricao a respeito do objeto.',
   CONSTRAINT `fk_tipo_objt_01` FOREIGN KEY (`ID_TIPO_OBJT`) REFERENCES `padrao_documento`.`T_TIPO_OBJT` (`ID_TIPO_OBJT`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -41,8 +41,8 @@ CREATE INDEX `IX_SPDC_OBJT01` ON `padrao_documento`.`T_SPDC_OBJT` (`ID_TIPO_OBJT
 CREATE INDEX `FK_PRFX_OBJT_01` ON `padrao_documento`.`T_SPDC_OBJT` (`ID_PRFX` ASC);
 
 CREATE TABLE IF NOT EXISTS `padrao_documento`.`T_SPDC_OBJT_VOCB_CNTLD` (
-  `ID_OBJT` INT NOT NULL COMMENT 'Identificador único do objeto inserido no sistema de padronizao de documentos.',
-  `ID_VOCB_CNTLD` INT NOT NULL COMMENT 'Identificador unico da tabela de vocabularios controlados.',
+  `ID_OBJT` INT DEFAULT NULL COMMENT 'Identificador único do objeto inserido no sistema de padronizao de documentos.',
+  `ID_VOCB_CNTLD` INT DEFAULT NULL COMMENT 'Identificador unico da tabela de vocabularios controlados.',
   PRIMARY KEY (`ID_OBJT`, `ID_VOCB_CNTLD`),
   CONSTRAINT `FK_SPDC_OBJT_VOCB_CNTLD` FOREIGN KEY (`ID_OBJT`) REFERENCES `padrao_documento`.`T_SPDC_OBJT` (`ID_OBJT`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_SPDC_VOCB_CNTLD` FOREIGN KEY (`ID_VOCB_CNTLD`) REFERENCES `padrao_documento`.`T_SPDC_VOCB_CNTLD` (`ID_VOCB_CNTLD`) ON DELETE NO ACTION ON UPDATE NO ACTION);
@@ -53,8 +53,8 @@ CREATE INDEX `IX_SPDC_OBJT_VOCB_CNTLD` ON `padrao_documento`.`T_SPDC_OBJT_VOCB_C
 
 CREATE TABLE IF NOT EXISTS `padrao_documento`.`T_SPDC_PRPD_OBJT` (
   `ID_PRPD_OBJT` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Identificador unico das propriedades de um objeto.',
-  `ID_PRFX` INT NOT NULL COMMENT 'Identificador unico do prefixo de objetos do banco. Por exemplo, DS para atributos usados como descricao, e T para tabelas.',
-  `ID_OBJT` INT NOT NULL COMMENT 'Identificador único do objeto inserido no sistema de padronizao de documentos.',
+  `ID_PRFX` INT DEFAULT NULL COMMENT 'Identificador unico do prefixo de objetos do banco. Por exemplo, DS para atributos usados como descricao, e T para tabelas.',
+  `ID_OBJT` INT DEFAULT NULL COMMENT 'Identificador único do objeto inserido no sistema de padronizao de documentos.',
   `NM_PRPD_OBJT` VARCHAR(50) NOT NULL,
   `DC_PRPD_OBJT` VARCHAR(1000) NOT NULL,
   CONSTRAINT `FK_OBJT_PRPD_01` FOREIGN KEY (`ID_OBJT`) REFERENCES `padrao_documento`.`T_SPDC_OBJT` (`ID_OBJT`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -65,8 +65,8 @@ CREATE INDEX `IX_SPDC_OBJT_PRPD1` ON `padrao_documento`.`T_SPDC_PRPD_OBJT` (`ID_
 CREATE INDEX `IX_SPDC_OBJT_PRPD2` ON `padrao_documento`.`T_SPDC_PRPD_OBJT` (`ID_PRFX` ASC);
 
 CREATE TABLE IF NOT EXISTS `padrao_documento`.`T_SPDC_PRPD_VOCB_CNTLD` (
-  `ID_PRPD_OBJT` INT NOT NULL COMMENT 'Identificador unico das propriedades de um objeto.',
-  `ID_VOCB_CNTLD` INT NOT NULL COMMENT 'Identificador unico da tabela de vocabularios controlados.',
+  `ID_PRPD_OBJT` INT DEFAULT NULL COMMENT 'Identificador unico das propriedades de um objeto.',
+  `ID_VOCB_CNTLD` INT DEFAULT NULL COMMENT 'Identificador unico da tabela de vocabularios controlados.',
   PRIMARY KEY (`ID_PRPD_OBJT`, `ID_VOCB_CNTLD`),
   CONSTRAINT `FK_SPDC_PRPD_VOCB_CNTLD01` FOREIGN KEY (`ID_VOCB_CNTLD`) REFERENCES `padrao_documento`.`T_SPDC_VOCB_CNTLD` (`ID_VOCB_CNTLD`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_SPDC_PRPD_VOCB_CNTLD02` FOREIGN KEY (`ID_PRPD_OBJT`) REFERENCES `padrao_documento`.`T_SPDC_PRPD_OBJT` (`ID_PRPD_OBJT`) ON DELETE NO ACTION ON UPDATE NO ACTION);

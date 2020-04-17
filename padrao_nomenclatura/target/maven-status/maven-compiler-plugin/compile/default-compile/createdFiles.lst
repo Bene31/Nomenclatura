@@ -16,7 +16,6 @@ dao\TSpdcVocbCntldDao.class
 bd\PersistenceUtil.class
 converter\PrefixoConverter.class
 dao\TSpdcPrfxDao.class
-converter\ObjetoConverter.class
 model\TSpdcPrmtAcssoTxto_.class
 model\TTipoObjt_.class
 dao\TSpdcObjtDao.class

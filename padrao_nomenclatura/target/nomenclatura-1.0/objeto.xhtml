@@ -68,14 +68,14 @@
             <p:dialog header="Novo" widgetVar="record" modal="true" focus="sigla">
                 <p:panelGrid id="panelRecord" columns="2"> 
                     TIPO:
-                    <p:selectOneMenu id="idTipoObjt" value="#{tSpdcObjtBean.TSpdcObjt.idTipoObjt}" style="width:250px" converter="#{TpObjtConverter}">
+                    <p:selectOneMenu id="idTipoObjt" value="#{tSpdcObjtBean.TSpdcObjt.idTipoObjt}" style="width:250px" converter="tpObjtConverter">
                                      <f:selectItem itemLabel="Selecione o tipo de objeto" itemValue="0"/>
-                                     <f:selectItems value="#{tSpdcObjtBean.TTipoObjts}" var="t" itemValue="#{t}" itemLabel="#{t.dsTipoObjt}" />
+                                     <f:selectItems value="#{tTipoObjtBean.TTipoObjts}" var="t" itemValue="#{t}" itemLabel="#{t.dsTipoObjt}" />
                     </p:selectOneMenu>
                     PREFIXO:
-                    <p:selectOneMenu id="idPrfx" value="#{tSpdcObjtBean.TSpdcObjt.idPrfx}" style="width:250px" converter="#{prefixoConverter}">
-                                     <f:selectItem itemLabel="Selecione um Prefixo" itemValue="0"/>
-                                     <f:selectItems value="#{tSpdcObjtBean.TSpdcPrfxs}" var="c" itemValue="#{c}" itemLabel="#{c.sgPrfx}" />
+                    <p:selectOneMenu id="idPrfx" value="#{tSpdcObjtBean.TSpdcObjt.idPrfx}" converter="prefixoConverter">
+                        <f:selectItem itemLabel="Selecione um Prefixo" itemValue="" />
+                        <f:selectItems value="#{tSpdcPrfxBean.TSpdcPrfxs}" var="c" itemLabel="#{c.sgPrfx}" itemValue="#{c}" />
                     </p:selectOneMenu>
                     NOME DO OBJETO:
                     <p:inputText id="sigla" value="#{tSpdcObjtBean.TSpdcObjt.nmObjt}" /> 

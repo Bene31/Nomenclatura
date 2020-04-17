@@ -20,7 +20,7 @@ import model.TSpdcObjt;
  * @author terra
  */
 
-public class TSpdcObjtDao implements Serializable{
+public class TSpdcObjtDao {
     public static TSpdcObjtDao tSpdcObjtDao;
     
     public static TSpdcObjtDao getInstance(){
@@ -30,97 +30,66 @@ public class TSpdcObjtDao implements Serializable{
         return tSpdcObjtDao;
     }
     
-    public TSpdcObjt buscar(int idObjt){
-        try{
-            EntityManager em = PersistenceUtil.getEntityManager();
-            Query query = em.createQuery("SELECT obj FROM TSpdcObjt obj WHERE obj.idObjt = :idObjt");
-            query.setParameter("idObjt", idObjt);
-            TSpdcObjt tSpdcObjt = (TSpdcObjt) query.getSingleResult();
-            if(tSpdcObjt != null && tSpdcObjt.getIdObjt()> 0){
-                return tSpdcObjt;
-            }else {
-                Logger.getLogger(PersistenceUtil.class.getName()).log(Level.INFO, "ERRO");
-                return null;
-            }
-        }catch (Exception e){
-            Logger.getLogger(PersistenceUtil.class.getName()).log(Level.WARNING, "ERRO");
-            return null;
-        }
-    }
-    
-    public TSpdcObjt buscar(TSpdcObjt obj){
-        try{
-            EntityManager em = PersistenceUtil.getEntityManager();
-            Query query = em.createQuery("SELECT obj FROM TSpdcObjt obj WHERE obj.idObjt = :idObjt");
-            query.setParameter("idObjt", obj.getIdObjt());
-            TSpdcObjt tSpdcObjt = (TSpdcObjt) query.getSingleResult();
-            if(tSpdcObjt != null && tSpdcObjt.getIdObjt()> 0){
-                return tSpdcObjt;
-            }else {
-                Logger.getLogger(PersistenceUtil.class.getName()).log(Level.INFO, "ERRO");
-                return null;
-            }
-        }catch (Exception e){
-            Logger.getLogger(PersistenceUtil.class.getName()).log(Level.WARNING, "ERRO");
-            return null;
-        }
-    }
-    
-    public List<TSpdcObjt> buscarTodas(){
-        try{
-            EntityManager em = PersistenceUtil.getEntityManager();
-            Query query = em.createQuery("SELECT obj FROM TSpdcObjt obj");
-            return query.getResultList();
-        }catch (Exception e){
-            Logger.getLogger(PersistenceUtil.class.getName()).log(Level.WARNING, "ERRO");
-            return new ArrayList<>();
-        }
-    }
-    
-    public String excluir(TSpdcObjt tSpdcObjt){
-        try{
-            EntityManager em = PersistenceUtil.getEntityManager();
-            em.getTransaction().begin();
-            tSpdcObjt = em.merge(tSpdcObjt);
-            em.remove(tSpdcObjt);
-            em.getTransaction().commit();
-            Logger.getLogger(PersistenceUtil.class.getName()).log(Level.INFO, "TSpdcPrfx removido com sucesso!");
-            return "TSpdcObjt " + tSpdcObjt.getNmObjt()+ " removido com sucesso!";
-        }catch (Exception e){
-            Logger.getLogger(PersistenceUtil.class.getName()).log(Level.WARNING, "ERRO");
-            return "Não foi possível remover o tSpdcObjt " + tSpdcObjt.getNmObjt();
-        }
-    }
-    
-    public String persistir(TSpdcObjt tSpdcObjt){
+    public TSpdcObjt buscar(String nmObjt) {
         EntityManager em = PersistenceUtil.getEntityManager();
-        try{
-            em.getTransaction().begin();
+        Query query = em.createQuery("select a from TSpdcObjt a where a.nmObjt =:nmObjt ");
+        query.setParameter("nmObjt", nmObjt);
+
+        List<TSpdcObjt> tSpdcObjt = query.getResultList();
+        if (tSpdcObjt != null && tSpdcObjt.size() > 0) {
+            return tSpdcObjt.get(0);
+        }
+
+        return null;
+    }
+
+    public List<TSpdcObjt> buscarTodas() {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        Query query = em.createQuery("from TSpdcObjt As a");
+        return query.getResultList();
+    }
+
+    public List<TSpdcObjt> buscarTSpdcObjteInstancia() {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        Query query = em.createQuery("select distinct a from TSpdcObjt a group by a.name");
+        return query.getResultList();
+    }
+
+        public List<TSpdcObjt> buscarTSpdcObjteTypeInstancia() {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        Query query = em.createQuery("select distinct a from TSpdcObjt a group by a.typeTSpdcObjt");
+        return query.getResultList();
+    }
+
+        public void excluir(TSpdcObjt tSpdcObjt) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        em.getTransaction().begin();
+        if (!em.contains(tSpdcObjt)) {
+            tSpdcObjt = em.merge(tSpdcObjt);
+        }
+        em.remove(tSpdcObjt);
+        em.getTransaction().commit();
+    }
+
+    public TSpdcObjt persistir(TSpdcObjt tSpdcObjt) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        em.getTransaction().begin();
+        try {
             tSpdcObjt = em.merge(tSpdcObjt);
             em.getTransaction().commit();
-            Logger.getLogger(PersistenceUtil.class.getName()).log(Level.INFO, "TSpdcObjt Salvo com sucesso!");
-            return "TSpdcObjt " + tSpdcObjt.getNmObjt()+ " salvo com sucesso!";
-        }catch(Exception e){
-            em.getTransaction().rollback();
-            Logger.getLogger(PersistenceUtil.class.getName()).log(Level.WARNING, "Não foi possível salvar o tSpdcPrfx!", e);
-            if(e.getMessage().contains("ConstraintViolationException")){
-                return "Não foi possível salvar o tSpdcPrfx " + tSpdcObjt.getNmObjt()+ ", pois o tSpdcObjt deve ser único ";
-            }
-        }return "Não foi possível salvar o tSpdcObjt " + tSpdcObjt.getNmObjt()+ "!";
-    }
-            
-    public String removeAll(){
-        try{
-            EntityManager em = PersistenceUtil.getEntityManager();
-            em.getTransaction().begin();
-            Query query = em.createQuery("DELETE FROM TSpdcObjt");
-            query.executeUpdate();
-            em.getTransaction().commit();
-            Logger.getLogger(PersistenceUtil.class.getName()).log(Level.INFO, "Todos os tSpdcObjt foram deletados com sucesso!");
-            return "Todos os tSpdcObjt foram deletados!";
-        }catch(Exception e){
-            Logger.getLogger(PersistenceUtil.class.getName()).log(Level.WARNING, "Não foi possível deletar todos os tSpdcObjt");
-            return "Não foi possível deletar todos os tSpdcObjt!";
+            System.out.println("Registro TSpdcObjt gravado com sucesso");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return tSpdcObjt;
     }
+
+    public void removeAll() {
+       EntityManager em = PersistenceUtil.getEntityManager();
+       em.getTransaction().begin();
+       Query query = em.createQuery(" delete from TSpdcObjt ");
+       query.executeUpdate();
+       em.getTransaction().commit();
+    }
+    
 }
