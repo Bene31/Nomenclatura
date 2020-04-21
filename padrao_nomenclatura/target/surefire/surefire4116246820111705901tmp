@@ -1,8 +1,0 @@
-#surefire
-#Sat Apr 11 12:44:41 BRT 2020
-maven.ext.class.path=C\:\\Program Files (x86)\\NetBeans 8.2\\java\\maven-nblib\\netbeans-eventspy.jar
-user.dir=C\:\\Users\\terra\\Desktop\\Nomenclatura\\padrao_nomenclatura
-file.encoding=UTF-8
-localRepository=C\:\\Users\\terra\\.m2\\repository
-netbeans.deploy=true
-basedir=C\:\\Users\\terra\\Desktop\\Nomenclatura\\padrao_nomenclatura

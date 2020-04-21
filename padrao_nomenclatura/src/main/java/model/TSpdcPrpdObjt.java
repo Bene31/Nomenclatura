@@ -10,12 +10,14 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -38,8 +40,8 @@ public class TSpdcPrpdObjt implements Serializable, Comparable<TSpdcPrpdObjt> {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID_PRPD_OBJT")
     private Integer idPrpdObjt;
     @Basic(optional = false)
@@ -52,13 +54,13 @@ public class TSpdcPrpdObjt implements Serializable, Comparable<TSpdcPrpdObjt> {
     @Size(min = 1, max = 1000)
     @Column(name = "DC_PRPD_OBJT")
     private String dcPrpdObjt;
-    @ManyToMany(mappedBy = "tSpdcPrpdObjtCollection")
-    private Collection<TSpdcVocbCntld> tSpdcVocbCntldCollection;
+    @OneToMany(mappedBy = "idPrpdObjt")
+    private Collection<TSpdcPrpdVocbCntld> tSpdcPrpdVocbCntldCollection;
     @JoinColumn(name = "ID_OBJT", referencedColumnName = "ID_OBJT")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private TSpdcObjt idObjt;
     @JoinColumn(name = "ID_PRFX", referencedColumnName = "ID_PRFX")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private TSpdcPrfx idPrfx;
 
     public TSpdcPrpdObjt() {
@@ -99,12 +101,12 @@ public class TSpdcPrpdObjt implements Serializable, Comparable<TSpdcPrpdObjt> {
     }
 
     @XmlTransient
-    public Collection<TSpdcVocbCntld> getTSpdcVocbCntldCollection() {
-        return tSpdcVocbCntldCollection;
+    public Collection<TSpdcPrpdVocbCntld> getTSpdcPrpdVocbCntldCollection() {
+        return tSpdcPrpdVocbCntldCollection;
     }
 
-    public void setTSpdcVocbCntldCollection(Collection<TSpdcVocbCntld> tSpdcVocbCntldCollection) {
-        this.tSpdcVocbCntldCollection = tSpdcVocbCntldCollection;
+    public void setTSpdcPrpdVocbCntldCollection(Collection<TSpdcPrpdVocbCntld> tSpdcPrpdVocbCntldCollection) {
+        this.tSpdcPrpdVocbCntldCollection = tSpdcPrpdVocbCntldCollection;
     }
 
     public TSpdcObjt getIdObjt() {
@@ -152,4 +154,5 @@ public class TSpdcPrpdObjt implements Serializable, Comparable<TSpdcPrpdObjt> {
     public int compareTo(TSpdcPrpdObjt tSpdcPrpdObjt) {
         return this.nmPrpdObjt.toLowerCase().compareTo(tSpdcPrpdObjt.getNmPrpdObjt().toLowerCase());
     }
+    
 }

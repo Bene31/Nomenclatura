@@ -1,0 +1,85 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <h2 class="page-header">Objeto X Vocabulário</h2>
+        <br/>
+        <h:form id="formPrincipal">
+            <div align="center">
+                
+                <p:dataTable var="lista" value="#{tSpdcObjtVocbCntldBean.TSpdcObjtVocbCntlds}"
+                             id="tabelaObjt" emptyMessage="Nenhum registro encontrado"
+                             paginatorTemplate="{RowsPerPageDropdown} {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                             paginator="true" rows="10" rowsPerPageTemplate="1, 5,10,25,50,100,9999" style="width:100%">
+                    <f:facet name="footer">Total de Prefixos: #{tSpdcObjtVocbCntldBean.TSpdcObjtVocbCntlds.size()}</f:facet>
+
+                    <p:column headerText="Código" sortBy="#{lista.idObjtVocb}" filterBy="#{lista.idObjtVocb}">
+                        <h:outputText value="#{lista.idObjtVocb}" />
+                    </p:column>
+                    
+                    <p:column headerText="Objeto" sortBy="#{lista.idObjt}" filterBy="#{lista.idObjt}">
+                        <h:outputText value="#{lista.idObjt.nmObjt}" />
+                    </p:column>
+                    
+                    <p:column headerText="Vocabulário" sortBy="#{lista.idVocbCntld}" filterBy="#{lista.idVocbCntld}">
+                        <h:outputText value="#{lista.idVocbCntld.sgVocbCntld}" />
+                    </p:column>
+                    
+                    
+                    <p:column headerText="Opções" exportable="false">
+                        <center>
+                            
+                            <p:commandButton icon="ui-icon-pencil" value="Editar" onclick="PF('record').show();"> 
+                                <f:setPropertyActionListener target="#{tSpdcObjtVocbCntldBean.TSpdcObjtVocbCntld}" value="#{lista}" />
+                            </p:commandButton>
+                            
+                            <p:commandButton icon="ui-icon-trash" value="Deletar" onclick="PF('remove').show();"> 
+                                <f:setPropertyActionListener target="#{tSpdcObjtVocbCntldBean.TSpdcObjtVocbCntld}" value="#{lista}" />
+                            </p:commandButton> 
+                        
+                        </center>
+                    </p:column>
+
+                </p:dataTable>
+            </div>
+            <br/>
+            
+            <p:column>
+                <p:commandButton icon="ui-icon-plus" value="Novo" onclick="PF('record').show();">  
+                </p:commandButton> 
+            </p:column>
+
+            <p:confirmDialog global="true">  
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+            </p:confirmDialog>  
+
+
+            <p:dialog header="Novo" widgetVar="record" modal="true" focus="idObjt">
+                <p:panelGrid id="panelRecord" columns="2"> 
+                    OBJETO:
+                    <p:selectOneMenu id="idObjt" value="#{tSpdcObjtVocbCntldBean.TSpdcObjtVocbCntld.idObjt}" style="width:250px" converter="objetoConverter">
+                                     <f:selectItem itemLabel="Selecione o tipo de objeto" itemValue="0"/>
+                                     <f:selectItems value="#{tSpdcObjtVocbCntldBean.TSpdcObjts}" var="t" itemValue="#{t}" itemLabel="#{t.nmObjt}" />
+                    </p:selectOneMenu>
+                    VOCABULÁRIO:
+                    <p:selectOneMenu id="idVocbCntld" value="#{tSpdcObjtVocbCntldBean.TSpdcObjtVocbCntld.idVocbCntld}" converter="vocabularioConverter">
+                        <f:selectItem itemLabel="Selecione um vocabulário" itemValue="" />
+                        <f:selectItems value="#{tSpdcObjtVocbCntldBean.TSpdcVocbCntlds}" var="c" itemLabel="#{c.sgVocbCntld}" itemValue="#{c}" />
+                    </p:selectOneMenu>
+                </p:panelGrid>  
+                <br/>
+                <p:commandButton value="Salvar" actionListener="#{tSpdcObjtVocbCntldBean.Record}" onclick="record.hide()" alt="Record"/> 
+            </p:dialog>
+            
+            <p:dialog header="Deletar" widgetVar="remove" modal="false"> 
+                Você tem certeza?
+                <p:commandButton value="Deletar" actionListener="#{tSpdcObjtVocbCntldBean.Exclude}" onclick="remove.hide()" alt="Delete" /> 
+            </p:dialog>
+            
+        </h:form>
+    </ui:define>
+</ui:composition>

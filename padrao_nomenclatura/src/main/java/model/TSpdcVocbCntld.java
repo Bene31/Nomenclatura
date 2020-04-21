@@ -10,12 +10,12 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -39,8 +39,8 @@ public class TSpdcVocbCntld implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID_VOCB_CNTLD")
     private Integer idVocbCntld;
     @Basic(optional = false)
@@ -56,13 +56,10 @@ public class TSpdcVocbCntld implements Serializable {
     @Size(max = 1)
     @Column(name = "FL_TIPO_VOCB_CNTLD")
     private String flTipoVocbCntld;
-    @ManyToMany(mappedBy = "tSpdcVocbCntldCollection")
-    private Collection<TSpdcObjt> tSpdcObjtCollection;
-    @JoinTable(name = "t_spdc_prpd_vocb_cntld", joinColumns = {
-        @JoinColumn(name = "ID_VOCB_CNTLD", referencedColumnName = "ID_VOCB_CNTLD")}, inverseJoinColumns = {
-        @JoinColumn(name = "ID_PRPD_OBJT", referencedColumnName = "ID_PRPD_OBJT")})
-    @ManyToMany
-    private Collection<TSpdcPrpdObjt> tSpdcPrpdObjtCollection;
+    @OneToMany(mappedBy = "idVocbCntld")
+    private Collection<TSpdcObjtVocbCntld> tSpdcObjtVocbCntldCollection;
+    @OneToMany(mappedBy = "idVocbCntld")
+    private Collection<TSpdcPrpdVocbCntld> tSpdcPrpdVocbCntldCollection;
 
     public TSpdcVocbCntld() {
     }
@@ -110,21 +107,21 @@ public class TSpdcVocbCntld implements Serializable {
     }
 
     @XmlTransient
-    public Collection<TSpdcObjt> getTSpdcObjtCollection() {
-        return tSpdcObjtCollection;
+    public Collection<TSpdcObjtVocbCntld> getTSpdcObjtVocbCntldCollection() {
+        return tSpdcObjtVocbCntldCollection;
     }
 
-    public void setTSpdcObjtCollection(Collection<TSpdcObjt> tSpdcObjtCollection) {
-        this.tSpdcObjtCollection = tSpdcObjtCollection;
+    public void setTSpdcObjtVocbCntldCollection(Collection<TSpdcObjtVocbCntld> tSpdcObjtVocbCntldCollection) {
+        this.tSpdcObjtVocbCntldCollection = tSpdcObjtVocbCntldCollection;
     }
 
     @XmlTransient
-    public Collection<TSpdcPrpdObjt> getTSpdcPrpdObjtCollection() {
-        return tSpdcPrpdObjtCollection;
+    public Collection<TSpdcPrpdVocbCntld> getTSpdcPrpdVocbCntldCollection() {
+        return tSpdcPrpdVocbCntldCollection;
     }
 
-    public void setTSpdcPrpdObjtCollection(Collection<TSpdcPrpdObjt> tSpdcPrpdObjtCollection) {
-        this.tSpdcPrpdObjtCollection = tSpdcPrpdObjtCollection;
+    public void setTSpdcPrpdVocbCntldCollection(Collection<TSpdcPrpdVocbCntld> tSpdcPrpdVocbCntldCollection) {
+        this.tSpdcPrpdVocbCntldCollection = tSpdcPrpdVocbCntldCollection;
     }
 
     @Override

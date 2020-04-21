@@ -8,13 +8,12 @@ package model;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -37,12 +36,12 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "TSpdcObjt.findByIdObjt", query = "SELECT t FROM TSpdcObjt t WHERE t.idObjt = :idObjt")
     , @NamedQuery(name = "TSpdcObjt.findByNmObjt", query = "SELECT t FROM TSpdcObjt t WHERE t.nmObjt = :nmObjt")
     , @NamedQuery(name = "TSpdcObjt.findByDcObjt", query = "SELECT t FROM TSpdcObjt t WHERE t.dcObjt = :dcObjt")})
-public class TSpdcObjt implements Serializable, Comparable<TSpdcObjt> {
+public class TSpdcObjt implements Serializable,  Comparable<TSpdcObjt> {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID_OBJT")
     private Integer idObjt;
     @Basic(optional = false)
@@ -53,18 +52,15 @@ public class TSpdcObjt implements Serializable, Comparable<TSpdcObjt> {
     @Size(max = 1000)
     @Column(name = "DC_OBJT")
     private String dcObjt;
-    @JoinTable(name = "t_spdc_objt_vocb_cntld", joinColumns = {
-        @JoinColumn(name = "ID_OBJT", referencedColumnName = "ID_OBJT")}, inverseJoinColumns = {
-        @JoinColumn(name = "ID_VOCB_CNTLD", referencedColumnName = "ID_VOCB_CNTLD")})
-    @ManyToMany
-    private Collection<TSpdcVocbCntld> tSpdcVocbCntldCollection;
     @JoinColumn(name = "ID_PRFX", referencedColumnName = "ID_PRFX")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private TSpdcPrfx idPrfx;
     @JoinColumn(name = "ID_TIPO_OBJT", referencedColumnName = "ID_TIPO_OBJT")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private TTipoObjt idTipoObjt;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idObjt")
+    @OneToMany(mappedBy = "idObjt")
+    private Collection<TSpdcObjtVocbCntld> tSpdcObjtVocbCntldCollection;
+    @OneToMany(mappedBy = "idObjt")
     private Collection<TSpdcPrpdObjt> tSpdcPrpdObjtCollection;
 
     public TSpdcObjt() {
@@ -103,15 +99,6 @@ public class TSpdcObjt implements Serializable, Comparable<TSpdcObjt> {
         this.dcObjt = dcObjt;
     }
 
-    @XmlTransient
-    public Collection<TSpdcVocbCntld> getTSpdcVocbCntldCollection() {
-        return tSpdcVocbCntldCollection;
-    }
-
-    public void setTSpdcVocbCntldCollection(Collection<TSpdcVocbCntld> tSpdcVocbCntldCollection) {
-        this.tSpdcVocbCntldCollection = tSpdcVocbCntldCollection;
-    }
-
     public TSpdcPrfx getIdPrfx() {
         return idPrfx;
     }
@@ -126,6 +113,15 @@ public class TSpdcObjt implements Serializable, Comparable<TSpdcObjt> {
 
     public void setIdTipoObjt(TTipoObjt idTipoObjt) {
         this.idTipoObjt = idTipoObjt;
+    }
+
+    @XmlTransient
+    public Collection<TSpdcObjtVocbCntld> getTSpdcObjtVocbCntldCollection() {
+        return tSpdcObjtVocbCntldCollection;
+    }
+
+    public void setTSpdcObjtVocbCntldCollection(Collection<TSpdcObjtVocbCntld> tSpdcObjtVocbCntldCollection) {
+        this.tSpdcObjtVocbCntldCollection = tSpdcObjtVocbCntldCollection;
     }
 
     @XmlTransient

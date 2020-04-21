@@ -8,9 +8,10 @@ package model;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -29,15 +30,15 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "t_tipo_objt")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TTipoObjt.findAll", query = "SELECT to FROM TTipoObjt to")
-    , @NamedQuery(name = "TTipoObjt.findByIdTipoObjt", query = "SELECT to FROM TTipoObjt to WHERE to.idTipoObjt = :idTipoObjt")
-    , @NamedQuery(name = "TTipoObjt.findByDsTipoObjt", query = "SELECT to FROM TTipoObjt to WHERE to.dsTipoObjt = :dsTipoObjt")})
+    @NamedQuery(name = "TTipoObjt.findAll", query = "SELECT t FROM TTipoObjt t")
+    , @NamedQuery(name = "TTipoObjt.findByIdTipoObjt", query = "SELECT t FROM TTipoObjt t WHERE t.idTipoObjt = :idTipoObjt")
+    , @NamedQuery(name = "TTipoObjt.findByDsTipoObjt", query = "SELECT t FROM TTipoObjt t WHERE t.dsTipoObjt = :dsTipoObjt")})
 public class TTipoObjt implements Serializable, Comparable<TTipoObjt> {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID_TIPO_OBJT")
     private Integer idTipoObjt;
     @Basic(optional = false)
@@ -45,7 +46,7 @@ public class TTipoObjt implements Serializable, Comparable<TTipoObjt> {
     @Size(min = 1, max = 45)
     @Column(name = "DS_TIPO_OBJT")
     private String dsTipoObjt;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoObjt")
+    @OneToMany(mappedBy = "idTipoObjt")
     private Collection<TSpdcObjt> tSpdcObjtCollection;
 
     public TTipoObjt() {

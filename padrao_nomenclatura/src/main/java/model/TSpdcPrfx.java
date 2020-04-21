@@ -8,9 +8,10 @@ package model;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -40,8 +41,8 @@ public class TSpdcPrfx implements Serializable, Comparable<TSpdcPrfx> {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID_PRFX")
     private Integer idPrfx;
     @Basic(optional = false)
@@ -69,9 +70,9 @@ public class TSpdcPrfx implements Serializable, Comparable<TSpdcPrfx> {
     @Size(min = 1, max = 400)
     @Column(name = "DS_DFNC_PRFX")
     private String dsDfncPrfx;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPrfx")
+    @OneToMany(mappedBy = "idPrfx")
     private Collection<TSpdcObjt> tSpdcObjtCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPrfx")
+    @OneToMany(mappedBy = "idPrfx")
     private Collection<TSpdcPrpdObjt> tSpdcPrpdObjtCollection;
 
     public TSpdcPrfx() {

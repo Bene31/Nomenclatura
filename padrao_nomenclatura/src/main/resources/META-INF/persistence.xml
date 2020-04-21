@@ -8,6 +8,16 @@
     <class>model.TSpdcPrfx</class>
     <class>model.TSpdcObjt</class>
     <class>model.TTipoObjt</class>
+    <class>bd.TSpdcObjtVocbCntld</class>
+    <class>bd.TSpdcPrpdVocbCntld</class>
+    <class>bd.TSpdcPrpdObjt</class>
+    <class>bd.TSpdcPrmtAcssoTxto</class>
+    <class>bd.TSpdcObjt</class>
+    <class>bd.TTipoObjt</class>
+    <class>bd.TSpdcVocbCntld</class>
+    <class>bd.TSpdcPrfx</class>
+    <class>model.TSpdcObjtVocbCntld</class>
+    <class>model.TSpdcPrpdVocbCntld</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3307/padrao_documento?zeroDateTimeBehavior=convertToNull"/>

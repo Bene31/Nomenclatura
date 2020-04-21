@@ -51,7 +51,7 @@ public class TSpdcObjtDao {
 
     public List<TSpdcObjt> buscarTSpdcObjteInstancia() {
         EntityManager em = PersistenceUtil.getEntityManager();
-        Query query = em.createQuery("select distinct a from TSpdcObjt a group by a.name");
+        Query query = em.createQuery("select distinct a from TSpdcObjt a group by a.nmObjt");
         return query.getResultList();
     }
 

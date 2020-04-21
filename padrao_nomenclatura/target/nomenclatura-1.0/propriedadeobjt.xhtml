@@ -64,7 +64,7 @@
             <p:dialog header="Novo" widgetVar="record" modal="true" focus="nome">
                 <p:panelGrid id="panelRecord" columns="2"> 
                     PREFIXO:
-                    <p:selectOneMenu id="idPrfx" value="#{tSpdcPrpdObjtBean.TSpdcPrpdObjt.idPrfx}" converter="prefixoConverter">
+                    <p:selectOneMenu id="idPrfx" value="#{tSpdcPrpdObjtBean.TSpdcPrpdObjt.idPrfx}" converter="prpdObjetoConverter">
                         <f:selectItem itemLabel="Selecione um Prefixo" itemValue="" />
                         <f:selectItems value="#{tSpdcPrfxBean.TSpdcPrfxs}" var="c" itemLabel="#{c.sgPrfx}" itemValue="#{c}" />
                     </p:selectOneMenu>
